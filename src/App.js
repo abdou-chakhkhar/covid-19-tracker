@@ -4,16 +4,17 @@ import {
   FormControl,
   MenuItem,
   Select,
-  Table,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import InfoBox from "./components/InfoBox/InfoBox";
 import LineGraph from "./components/LineGraph/LineGraph";
 import Map from "./components/Map/Map";
+import Table from "./components/Table/Table";
 
 import numeral from "numeral";
-import { prettyPrintStat } from "./util/util";
+import { sortData, prettyPrintStat } from "./util/util";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -23,6 +24,7 @@ function App() {
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   const [mapZoom, setMapZoom] = useState(3);
   const [mapCountries, setMapCountries] = useState([]);
+  const [tableData, setTableData] = useState([]);
 
   console.log(countryInfo);
 
@@ -43,8 +45,10 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2,
           }));
+          let sortedData = sortData(data);
           setCountries(countries);
           setMapCountries(data);
+          setTableData(sortedData);
         });
     };
 
@@ -131,9 +135,9 @@ function App() {
         <CardContent>
           <div className="app__information">
             <h3>Live Cases by Country</h3>
-            <Table />
+            <Table countries={tableData} />
             <h3>Worldwide new </h3>
-            <LineGraph />
+            <LineGraph casesType={casesType} />
           </div>
         </CardContent>
       </Card>
