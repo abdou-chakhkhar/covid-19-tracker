@@ -119,10 +119,6 @@ function App() {
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={numeral(countryInfo.deaths).format("0.0a")}
           />
-          <InfoBox
-            title="Active Cases"
-            cases={prettyPrintStat(countryInfo.active)}
-          />
         </div>
         <Map
           countries={mapCountries}
