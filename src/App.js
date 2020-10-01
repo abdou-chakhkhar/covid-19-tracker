@@ -16,7 +16,7 @@ import numeral from "numeral";
 import { sortData, prettyPrintStat } from "./util/util";
 import "leaflet/dist/leaflet.css";
 
-function App() {
+const App = () => {
   const [countries, setCountries] = useState([]);
   const [country, setInputCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
@@ -56,7 +56,6 @@ function App() {
   }, []);
 
   console.log(mapCountries);
-  console.log(countries);
 
   const onCountryChange = async (e) => {
     const countryCode = e.target.value;
@@ -139,6 +138,6 @@ function App() {
       </Card>
     </div>
   );
-}
+};
 
 export default App;
